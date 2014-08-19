@@ -118,6 +118,7 @@ if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 # Note the quotes around `$TEMP': they are essential!
 eval set -- "$TEMP"
 
+source config
 #Location of all servers
 SERVERS=/media/Storage
 #This variable contains the server name. It is used to support multiple servers.

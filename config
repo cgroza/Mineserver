@@ -1,5 +1,5 @@
 #Location of all servers
-SERVERS=/media/Storage
+SERVERS=
 #The server jar. Used to manage different jars.
 SERVER_JAR=minecraft_server.jar
-BACKUP_DIR=/media/Storage/Backups
+BACKUP_DIR=
