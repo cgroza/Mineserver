@@ -80,17 +80,20 @@ backup()
     if [ $asw == "y" ]; then
 	cd $BACKUP_DIR
 	BACKUP="$SERVER_NAME.tar.gz"
-	if [ -f $BACKUP ]; then
-	    echo "Deleting old backup..."
-	    echo "rm $BACKUP"
-	    rm "$BACKUP"
-	fi
-	echo "Backing up to $BACKUP ..."
-	echo "tar -cvzf $BACKUP $SERVER_DIR"
+	echo "Backing up to /tmp/$BACKUP ..."
+	echo "tar -cvzf /tmp/$BACKUP $SERVER_DIR"
 	#compress the server and move it to $BACKUP
-	tar -cvzf "$BACKUP" -C "$SERVER_DIR" .
+	tar -cvzf "/tmp/$BACKUP" -C "$SERVER_DIR" .
 	if [ $? -eq "0" ]; then
 	    echo "Backup succesful."
+	    if [ -f $BACKUP ]; then
+	    	echo "Deleting old backup..."
+	    	echo "rm $BACKUP"
+	        rm "$BACKUP"
+	    fi
+	    echo "Moving new backup..."
+	    echo "mv /tmp/$BACKUP $BACKUP"
+	    mv "/tmp/$BACKUP" "$BACKUP"
 	else
 	    echo "Backup failed. cp: Code $?"
 	fi
