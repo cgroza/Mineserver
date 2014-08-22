@@ -2,4 +2,5 @@
 SERVERS=
 #The server jar. Used to manage different jars.
 SERVER_JAR=minecraft_server.jar
+#Location of the servers backup
 BACKUP_DIR=
