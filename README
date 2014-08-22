@@ -16,3 +16,5 @@ program options:
 
 -s start server (creates one if missing)
 
+-l list servers
+

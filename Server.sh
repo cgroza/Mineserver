@@ -30,8 +30,8 @@ update_server()
 	wget "$update_url"
 	if [ $? -eq 0 ]; then
 	    echo "UPDATE SUCCESSFUL! Renaming and editing version file..."
-	    echo "mv $minecraft_file minecraft_server.jar"
-	    mv "$minecraft_file" minecraft_server.jar
+	    echo "mv $minecraft_file $SERVER_JAR"
+	    mv "$minecraft_file" "$SERVER_JAR"
 	    echo $link_version > version
 	else
 	    echo "UPDATE FAILED. Fix it and restart it!"
@@ -103,7 +103,7 @@ listservers()
     cd "$SERVERS"
     for server in *
     do
-	if [ $(ls "$server" | grep "minecraft_server.jar") ]
+	if [ $(ls "$server" | grep "$SERVER_JAR") ]
 	then
 	    echo $server
 	fi
