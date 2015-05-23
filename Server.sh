@@ -78,6 +78,7 @@ backup()
     #ask the user for permission to backup
     read -p "Do you wish to back it up to $BACKUP_DIR? y/N:" asw
     if [ $asw == "y" ]; then
+<<<<<<< HEAD
         cd $BACKUP_DIR
         BACKUP="$SERVER_NAME.tar.gz"
         if [ -f $BACKUP ]; then
@@ -94,6 +95,27 @@ backup()
         else
             echo "Backup failed. cp: Code $?"
         fi
+=======
+        cd $BACKUP_DIR
+        BACKUP="$SERVER_NAME.tar.gz"
+        echo "Backing up to /tmp/$BACKUP ..."
+        echo "tar -cvzf /tmp/$BACKUP $SERVER_DIR"
+        #compress the server and move it to $BACKUP
+        tar -cvzf "/tmp/$BACKUP" -C "$SERVER_DIR" .
+        if [ $? -eq "0" ]; then
+            echo "Backup succesful."
+            if [ -f $BACKUP ]; then
+                echo "Deleting old backup..."
+                echo "rm $BACKUP"
+                rm "$BACKUP"
+            fi
+            echo "Moving new backup..."
+            echo "mv /tmp/$BACKUP $BACKUP"
+            mv "/tmp/$BACKUP" "$BACKUP"
+        else
+            echo "Backup failed. cp: Code $?"
+        fi
+>>>>>>> d78481c0e04f9db42424687fd8ce076601669ca1
     fi
 }
 
