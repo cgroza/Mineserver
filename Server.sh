@@ -1,5 +1,17 @@
 #!/bin/bash
 
+createserver()
+{
+    echo "Creating server in " $SERVER_DIR
+    # create dir and version file
+    mkdir "$SERVER_DIR"
+    cd "$SERVER_DIR"
+    echo "0" > version
+    # agree to eula
+    echo "eula=true" > eula.txt
+    $EDITOR server.properties
+}
+
 removeserver()
 {
     #ask the user for permission to remove
@@ -49,13 +61,7 @@ runserver()
     if [ $? -eq 1 ]; then
         read -p "SERVER NOT FOUND! Create? y/n: " asw
         if [ $asw == "y" ]; then
-            # create dir and version file
-            mkdir "$SERVER_DIR"
-            cd "$SERVER_DIR"
-            echo "0" > version
-            # agree to eula
-            echo "eula=true" > eula.txt
-            $EDITOR server.properties
+            createserver
         else
             exit 0
         fi
@@ -121,7 +127,7 @@ restoreserver()
     tar -xvzf "$BACKUP_DIR/$SERVER_NAME.tar.gz"
     }
 
-TEMP=`getopt -o srbl -- "$@"`
+TEMP=`getopt -o chRsrbl -- "$@"`
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 
@@ -138,12 +144,13 @@ SERVER_DIR=${SERVERS}/${SERVER_NAME}
 while true
 do
     case "$1" in
+        "-c") createserver; shift;;
         "-s") runserver; shift;;
         "-b") backup; shift;;
         "-R") removeserver; shift;;
         "-r") restoreserver; shift;;
         "-l")  listservers; shift;;
-        "-h") echo "Server.sh [-s -b -r -R -l] server-name";;
+        "-h") echo "Server.sh [-c -s -b -r -R -l] server-name"; shift;;
         --) break;;
         *) echo "Usage: program -h"; shift; break;;
     esac
