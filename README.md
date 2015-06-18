@@ -19,8 +19,8 @@ BACKUP_DIR=
 ```
 
 SERVERS should point to the directory where Minecraft servers are stored.  
-SERVER_JAR is the name of the minecraft server jar file__
-BACKUP_DIR should specify the directory where backup archives will be stored.__
+SERVER_JAR is the name of the minecraft server jar file  
+BACKUP_DIR should specify the directory where backup archives will be stored.  
 
 USAGE:
 --------------------------
