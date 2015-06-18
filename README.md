@@ -5,14 +5,14 @@ GPL3 Licensed.
 Configuration:
 --------------------------
 
-``
+```
 #Location of all servers, should be an absolute path to avoid confusion.
 SERVERS=
 #The server jar name. Used to start the server and identify directories that contain servers.
 SERVER_JAR=minecraft_server.jar
 #Location of the servers backup, should be an absolute path to avoid confusion.
 BACKUP_DIR=
-``
+```
 
 SERVERS should point to the directory where Minecraft servers are stored.  
 SERVER_JAR is the name of the minecraft server jar file 
