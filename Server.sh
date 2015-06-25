@@ -162,7 +162,7 @@ do
         "-r") restore; shift;;
         "-l")  list; shift;;
         "-u")  update; shift;;
-        "-h") echo "Server.sh [-c -s -b -r -R -l] server-name"; shift;;
+        "-h") echo "Server.sh [-c -s -b -r -R -l -u] server-name"; shift;;
         --) break;;
         *) echo "Usage: program -h"; shift; break;;
     esac

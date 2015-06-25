@@ -42,6 +42,8 @@ options:
 
 -l list servers
 
+-u update server
+
 Example:
 ``
 ./Server -sb our_sever
