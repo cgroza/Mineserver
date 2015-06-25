@@ -1,6 +1,6 @@
 #!/bin/bash
 
-createserver()
+create()
 {
     echo "Creating server in " $SERVER_DIR
     # create dir and version file
@@ -12,7 +12,7 @@ createserver()
     $EDITOR server.properties
 }
 
-removeserver()
+remove()
 {
     #ask the user for permission to remove
     read -p "Do you wish to remove $SERVER_DIR? y/N:" asw
@@ -53,7 +53,7 @@ update_server()
     fi
 }
 
-runserver()
+run()
 {
     #working in the server directory from here.
     cd "$SERVER_DIR"
@@ -61,7 +61,7 @@ runserver()
     if [ $? -eq 1 ]; then
         read -p "SERVER NOT FOUND! Create? y/n: " asw
         if [ $asw == "y" ]; then
-            createserver
+            create
         else
             exit 0
         fi
@@ -106,7 +106,7 @@ backup()
     fi
 }
 
-listservers()
+list()
 {
     echo "SERVERS IN $SERVERS:"
     cd "$SERVERS"
@@ -119,15 +119,26 @@ listservers()
     done
 }
 
-restoreserver()
+restore()
 {
     removeserver
     mkdir "$SERVER_DIR"
     cd "$SERVER_DIR"
     tar -xvzf "$BACKUP_DIR/$SERVER_NAME.tar.gz"
-    }
+}
 
-TEMP=`getopt -o chRsrbl -- "$@"`
+update()
+{
+    #working in the server directory from here.
+    cd "$SERVER_DIR"
+    #create server if it does not exist
+    if [ $? -eq 1 ]; then
+        echo "NO SUCH SERVER"
+        return -1
+    fi
+    update_server
+}
+TEMP=`getopt -o uchRsrbl -- "$@"`
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 
@@ -144,12 +155,13 @@ SERVER_DIR=${SERVERS}/${SERVER_NAME}
 while true
 do
     case "$1" in
-        "-c") createserver; shift;;
-        "-s") runserver; shift;;
+        "-c") create; shift;;
+        "-s") run; shift;;
         "-b") backup; shift;;
-        "-R") removeserver; shift;;
-        "-r") restoreserver; shift;;
-        "-l")  listservers; shift;;
+        "-R") remove; shift;;
+        "-r") restore; shift;;
+        "-l")  list; shift;;
+        "-u")  update; shift;;
         "-h") echo "Server.sh [-c -s -b -r -R -l] server-name"; shift;;
         --) break;;
         *) echo "Usage: program -h"; shift; break;;
