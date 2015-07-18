@@ -71,7 +71,7 @@ run()
 
     echo "Starting $SERVER_NAME... Have fun."
     echo "java $JVM_FLAGS" -jar "$SERVER_JAR" "$MC_FLAGS"
-    java "$JVM_FLAGS" -jar "$SERVER_JAR" "$MC_FLAGS"
+    java $JVM_FLAGS -jar "$SERVER_JAR" $MC_FLAGS
     echo "The server has stopped."
     #print server size
     read NEW_SERVER_SIZE rest <<< $(du -hs $SERVER_DIR)
