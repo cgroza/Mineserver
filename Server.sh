@@ -70,7 +70,7 @@ run()
     update_server
 
     echo "Starting $SERVER_NAME... Have fun."
-    echo "java -Xms1024M -Xmx1024M -jar $SERVER_JAR nogui"
+    echo "java $JVM_FLAGS" -jar "$SERVER_JAR" "$MC_FLAGS"
     java "$JVM_FLAGS" -jar "$SERVER_JAR" "$MC_FLAGS"
     echo "The server has stopped."
     #print server size
