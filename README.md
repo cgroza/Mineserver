@@ -16,12 +16,16 @@ SERVERS=
 SERVER_JAR=minecraft_server.jar
 #Location of the servers backup, should be an absolute path to avoid confusion.
 BACKUP_DIR=
+#Flags for the java virtual machine
+JVM_FLAGS=-Xms1024M -Xmx1024M 
+#Flags for the minecraft server
+MC_FLAGS=nogui
 ```
 
 SERVERS should point to the directory where Minecraft servers are stored.  
 SERVER_JAR is the name of the minecraft server jar file.  
 BACKUP_DIR should specify the directory where backup archives will be stored.  
-
+JVM_FLAGS and MC_FLAGS are command line arguments to be passed to the java virtual machine and the minecraft server respectively.
 USAGE:
 --------------------------
 The script will execute all the flags provided in the command line sequentially.  

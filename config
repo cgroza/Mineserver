@@ -4,3 +4,7 @@ SERVERS=
 SERVER_JAR=minecraft_server.jar
 #Location of the servers backup, should be an absolute path to avoid confusion.
 BACKUP_DIR=
+#Flags for the java virtual machine
+JVM_FLAGS=-Xms1024M -Xmx1024M 
+#Flags for the minecraft server
+MC_FLAGS=nogui
