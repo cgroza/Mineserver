@@ -1,10 +1,10 @@
 #Location of all servers, should be an absolute path to avoid confusion.
 SERVERS=
 #The server jar name. Used to start the server and identify directories that contain servers.
-SERVER_JAR=minecraft_server.jar
+SERVER_JAR="minecraft_server.jar"
 #Location of the servers backup, should be an absolute path to avoid confusion.
 BACKUP_DIR=
 #Flags for the java virtual machine
-JVM_FLAGS=-Xms1024M -Xmx1024M 
+JVM_FLAGS="-Xms1024M -Xmx1024M"
 #Flags for the minecraft server
-MC_FLAGS=nogui
+MC_FLAGS="nogui"
