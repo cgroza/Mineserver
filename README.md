@@ -1,4 +1,4 @@
-License:
+License
 --------------------------
 GPL3 Licensed.
 
@@ -43,6 +43,8 @@ options:
 -b backup server
 
 -s start server (creates one if missing)
+
+-S summary of last log (joins, unique joins, kicks, bans, chat replies)
 
 -l list servers
 

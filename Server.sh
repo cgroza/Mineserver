@@ -119,6 +119,25 @@ list()
     done
 }
 
+summary()
+{
+    echo "LATEST LOG FOR: $SERVER_NAME"
+    n_joins=$(cat "$SERVER_LOG" | cut -c 32- | grep -G "^: .\+ joined the game" | wc -l)
+    # find unique player joins
+    n_unique_joins=$(cat "$SERVER_LOG" | cut -c 32- | grep -G "^: .\+ joined the game" | sort | uniq | wc -l)
+    # find number of kicks
+    n_kicks=$(cat "$SERVER_LOG" | cut -c 32- | grep -G "^: Kicked .\+ from the game" | wc -l)
+    # find number of bans
+    n_bans=$(cat "$SERVER_LOG" | cut -c 32- | grep -G "^: Banned player" | wc -l)
+    # find number of chat replies
+    n_replies=$(cat "$SERVER_LOG" | cut -c 32- | grep "^: <.\+>" | wc -l)
+    echo JOINS: $n_joins
+    echo UNIQUE JOINS: $n_unique_joins
+    echo KICKS: $n_kicks
+    echo BANS: $n_bans
+    echo CHAT REPLIES: $n_replies
+}
+
 restore()
 {
     removeserver
@@ -138,7 +157,7 @@ update()
     fi
     update_server
 }
-TEMP=`getopt -o uchRsrbl -- "$@"`
+TEMP=`getopt -o uchRSsrbl -- "$@"`
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 
@@ -150,13 +169,14 @@ source config
 SERVER_NAME=${@: -1} #get last argument on argument list (server-name)
 #The server directory is only refered by this variable.
 SERVER_DIR=${SERVERS}/${SERVER_NAME}
-
+SERVER_LOG=${SERVER_DIR}/logs/latest.log
 
 while true
 do
     case "$1" in
         "-c") create; shift;;
         "-s") run; shift;;
+        "-S") summary; shift;;
         "-b") backup; shift;;
         "-R") remove; shift;;
         "-r") restore; shift;;
